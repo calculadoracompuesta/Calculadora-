@@ -2,23 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    oc>https://calculadoracompuesta.netlify.app/</loc>
-    astmod>2026-03-19</lastmod>
-    hangefreq>monthly</changefreq>
+    <loc>https://calculadoracompuesta.netlify.app/</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    oc>https://calculadoracompuesta.netlify.app/</loc>
-    astmod>2026-03-19</lastmod>
-    hangefreq>monthly</changefreq>
+    <loc>https://calculadoracompuesta.netlify.app/indices.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    oc>https://calculadoracompuesta.netlify.app/</loc>
-    astmod>2026-03-19</lastmod>
-    hangefreq>yearly</changefreq>
+    <loc>https://calculadoracompuesta.netlify.app/conversor.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://calculadoracompuesta.netlify.app/privacidad.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
