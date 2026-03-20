@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+    );
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Conversor de divisas en tiempo real. Convierte entre Euro, Dólar, Libra, Yen, Franco Suizo, Yuan y más de 15 monedas al instante." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://calculadoracompuesta.netlify.app/conversor.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"         content="website" />
+  <meta property="og:title"        content="Conversor de Divisas en Tiempo Real" />
+  <meta property="og:description"  content="Convierte entre más de 15 monedas al instante. Gratis y sin registro." />
+  <meta property="og:url"          content="https://calculadoracompuesta.netlify.app/conversor.html" />
+  <meta property="og:image"        content="https://calculadoracompuesta.netlify.app/og-image.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale"       content="es_ES" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Conversor de Divisas en Tiempo Real" />
+  <meta name="twitter:image"       content="https://calculadoracompuesta.netlify.app/og-image.png" />
+
+  <title>Conversor de Divisas en Tiempo Real | Calculadora Financiera</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="cookies.css" />
+  <link rel="stylesheet" href="conversor.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" data-i18n="nav.logo">Calculadora Financiera</a>
+      <div class="nav-links">
+        <a href="index.html"    class="nav-link" data-i18n="nav.calc">Calculadora</a>
+        <a href="indices.html"  class="nav-link" data-i18n="nav.indices">Índices mundiales</a>
+        <a href="conversor.html" class="nav-link active" data-i18n="nav.conversor">Conversor divisas</a>
+        <div class="nav-divider"></div>
+        <button class="nav-btn lang-btn" id="lang-toggle" onclick="toggleLang()" title="Switch language">EN</button>
+        <button class="nav-btn theme-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="header-label" data-i18n="conv.header.label">Tipos de cambio en tiempo real</div>
+      <h1 data-i18n="conv.header.h1">Conversor de Divisas</h1>
+      <p data-i18n="conv.header.p">Convierte entre las principales monedas del mundo al instante. Datos actualizados diariamente por el Banco Central Europeo.</p>
+      <div class="header-stats">
+        <div class="stat"><span class="stat-num">15+</span><span class="stat-desc" data-i18n="conv.stat1">monedas disponibles</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">BCE</span><span class="stat-desc" data-i18n="conv.stat2">fuente oficial</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-desc" data-i18n="stat.free">gratuito y sin registro</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- CONVERSOR PRINCIPAL -->
+    <div class="card conv-card">
+
+      <!-- Estado: cargando / error -->
+      <div id="conv-status" class="conv-status conv-loading">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+        <span data-i18n="conv.loading">Cargando tipos de cambio…</span>
+      </div>
+
+      <!-- FILA ORIGEN -->
+      <div class="conv-row">
+        <div class="conv-field">
+          <label for="amount-from" data-i18n="conv.amount">Cantidad</label>
+          <input type="number" id="amount-from" value="1" min="0" step="any"
+                 oninput="convertFrom()" autocomplete="off" />
+        </div>
+        <div class="conv-field">
+          <label for="currency-from" data-i18n="conv.from">De</label>
+          <select id="currency-from" onchange="convertFrom()"></select>
+        </div>
+      </div>
+
+      <!-- BOTÓN SWAP -->
+      <div class="conv-swap-row">
+        <button class="conv-swap-btn" onclick="swapCurrencies()" aria-label="Intercambiar monedas" title="Intercambiar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/>
+          </svg>
+        </button>
+        <div class="conv-rate-badge" id="rate-badge"></div>
+      </div>
+
+      <!-- FILA DESTINO -->
+      <div class="conv-row">
+        <div class="conv-field">
+          <label for="amount-to" data-i18n="conv.result">Resultado</label>
+          <input type="number" id="amount-to" value="" min="0" step="any"
+                 oninput="convertTo()" autocomplete="off" />
+        </div>
+        <div class="conv-field">
+          <label for="currency-to" data-i18n="conv.to">A</label>
+          <select id="currency-to" onchange="convertFrom()"></select>
+        </div>
+      </div>
+
+      <!-- ÚLTIMA ACTUALIZACIÓN -->
+      <p class="conv-updated" id="conv-updated"></p>
+
+    </div>
+
+    <!-- TABLA DE TIPOS CRUZADOS -->
+    <div class="card" style="margin-top:24px;">
+      <h2 data-i18n="conv.table.h2">Tabla de tipos cruzados</h2>
+      <p class="content-lead" data-i18n="conv.table.p">Equivalencia de 1 unidad de cada moneda respecto al Euro (EUR). Actualizado diariamente con datos del BCE.</p>
+      <div class="table-wrap" style="margin-top:16px;">
+        <table id="rates-table">
+          <thead>
+            <tr>
+              <th data-i18n="conv.th.currency">Moneda</th>
+              <th data-i18n="conv.th.code">Código</th>
+              <th data-i18n="conv.th.rate">1 EUR =</th>
+              <th data-i18n="conv.th.inverse">1 unidad = EUR</th>
+            </tr>
+          </thead>
+          <tbody id="rates-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECCIÓN EDUCATIVA -->
+    <section class="content-section" style="margin-top:24px;">
+      <h2 class="content-h2" data-i18n="conv.edu.h2">¿Cómo funcionan los tipos de cambio?</h2>
+      <div class="content-grid">
+        <div>
+          <p data-i18n="conv.edu.p1">El tipo de cambio es el precio al que una moneda se intercambia por otra. Los mercados de divisas (Forex) mueven más de 7 billones de dólares diarios, siendo el mayor mercado financiero del mundo. Los tipos fluctúan continuamente por factores como inflación, tipos de interés, balanza comercial y decisiones de los bancos centrales.</p>
+          <p style="margin-top:14px" data-i18n="conv.edu.p2">Los datos de este conversor provienen de la API de Frankfurter, que publica los tipos de referencia oficiales del Banco Central Europeo cada día hábil. Son tipos interbancarios: el tipo real que obtendrás en un banco o casa de cambio incluirá una comisión adicional del 1–3%.</p>
+        </div>
+        <div class="example-box">
+          <div class="example-title" data-i18n="conv.edu.box.title">Monedas principales</div>
+          <ul class="example-list">
+            <li><span>EUR · Euro</span><strong>🇪🇺 Eurozona</strong></li>
+            <li><span>USD · Dólar</span><strong>🇺🇸 EE.UU.</strong></li>
+            <li><span>GBP · Libra</span><strong>🇬🇧 Reino Unido</strong></li>
+            <li><span>JPY · Yen</span><strong>🇯🇵 Japón</strong></li>
+            <li><span>CHF · Franco</span><strong>🇨🇭 Suiza</strong></li>
+            <li><span>CNY · Yuan</span><strong>🇨🇳 China</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-disclaimer">
+        <strong>Aviso:</strong> <span data-i18n="conv.footer.disc">Los tipos de cambio mostrados son de referencia (BCE) y pueden diferir del tipo aplicado por entidades financieras. No constituyen asesoramiento financiero.</span>
+      </div>
+      <div class="footer-links">
+        <a href="privacidad.html" data-i18n="footer.privacy">Política de Privacidad y Cookies</a>
+        <span>·</span>
+        <span data-i18n="footer.copy">© 2026 Calculadora Financiera</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="conversor.js"></script>
+  <script src="cookies.js"></script>
+  <script src="i18n.js"></script>
+
+</body>
+</html>

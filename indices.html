@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Previene destello de tema incorrecto (FOUC) -->
+  <script>
+    document.documentElement.setAttribute('data-theme',
+        localStorage.getItem('theme') ||
+        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+    );
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rentabilidad histórica de los principales índices bursátiles del mundo: S&P 500, NASDAQ 100, MSCI World, IBEX 35, DAX 40 y Nikkei 225. Datos desde 2010." />
+  <meta name="robots" content="index, follow" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://calculadoracompuesta.netlify.app/indices.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type"         content="website">
+  <meta property="og:title"        content="Rentabilidad Histórica de Índices Bursátiles">
+  <meta property="og:description"  content="Compara S&P 500, NASDAQ, MSCI World, IBEX 35, DAX y Nikkei desde 2010.">
+  <meta property="og:url"          content="https://calculadoracompuesta.netlify.app/indices.html">
+  <meta property="og:image"        content="https://calculadoracompuesta.netlify.app/og-image.png">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale"       content="es_ES">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Rentabilidad Histórica de Índices Bursátiles">
+  <meta name="twitter:image"       content="https://calculadoracompuesta.netlify.app/og-image.png">
+
+  <title>Rentabilidad Histórica de Índices Bursátiles | Calculadora Financiera</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="cookies.css" />
+  <link rel="stylesheet" href="chat.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" data-i18n="nav.logo">Calculadora Financiera</a>
+      <div class="nav-links">
+        <a href="index.html"   class="nav-link" data-i18n="nav.calc">Calculadora</a>
+        <a href="indices.html" class="nav-link active" data-i18n="nav.indices">Índices mundiales</a>
+        <a href="conversor.html" class="nav-link" data-i18n="nav.conversor">Conversor divisas</a>
+        <div class="nav-divider"></div>
+        <button class="nav-btn lang-btn" id="lang-toggle" onclick="toggleLang()" title="Switch language">EN</button>
+        <button class="nav-btn theme-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="header-label" data-i18n="idx.header.label">Datos históricos · 2010–2024</div>
+      <h1 data-i18n="idx.header.h1">Rentabilidad de los Grandes Índices Bursátiles</h1>
+      <p data-i18n="idx.header.p">Compara el comportamiento histórico de los principales índices del mundo y entiende qué rentabilidad habrías obtenido invirtiendo desde 2010.</p>
+      <div class="header-stats">
+        <div class="stat"><span class="stat-num">6</span><span class="stat-desc" data-i18n="idx.stat1">índices analizados</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">15</span><span class="stat-desc" data-i18n="idx.stat2">años de datos</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-desc" data-i18n="stat.free">gratuito</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- FILTRO DE ÍNDICES -->
+    <div class="card" style="margin-bottom:24px;">
+      <h2 data-i18n="idx.filters.h2">Selecciona los índices a comparar</h2>
+      <div class="index-filters" id="index-filters">
+        <button class="filter-btn active" data-index="sp500"  style="--c:#3b82f6">S&amp;P 500</button>
+        <button class="filter-btn active" data-index="nasdaq" style="--c:#22d3ee">NASDAQ 100</button>
+        <button class="filter-btn active" data-index="msci"   style="--c:#10b981">MSCI World</button>
+        <button class="filter-btn active" data-index="ibex"   style="--c:#f59e0b">IBEX 35</button>
+        <button class="filter-btn active" data-index="dax"    style="--c:#a78bfa">DAX 40</button>
+        <button class="filter-btn active" data-index="nikkei" style="--c:#fb923c">Nikkei 225</button>
+      </div>
+    </div>
+
+    <!-- GRÁFICO 1: CRECIMIENTO ACUMULADO -->
+    <div class="card" style="margin-bottom:24px;">
+      <h2 data-i18n="idx.chart1.h2">Crecimiento acumulado de 10.000 € invertidos en 2010</h2>
+      <p class="content-lead" style="margin-bottom:20px;" data-i18n="idx.chart1.p">Muestra cuánto habrían crecido 10.000 € invertidos a principios de 2010 en cada índice, en moneda local y sin comisiones ni impuestos.</p>
+      <div class="chart-wrapper" style="height:380px;">
+        <canvas id="chartCumulativo" role="img" aria-label="Gráfico de crecimiento acumulado por índice"></canvas>
+      </div>
+    </div>
+
+    <!-- GRÁFICO 2: RENTABILIDAD ANUAL -->
+    <div class="card" style="margin-bottom:24px;">
+      <h2 data-i18n="idx.chart2.h2">Rentabilidad anual por índice (%)</h2>
+      <p class="content-lead" style="margin-bottom:20px;" data-i18n="idx.chart2.p">Cada barra representa el porcentaje de subida o bajada del índice durante ese año. Los años en rojo representan pérdidas.</p>
+      <div class="index-year-selector">
+        <label for="sel-index" data-i18n="idx.label.index">Ver índice:</label>
+        <select id="sel-index" onchange="updateBarChart()">
+          <option value="sp500">S&amp;P 500</option>
+          <option value="nasdaq">NASDAQ 100</option>
+          <option value="msci">MSCI World</option>
+          <option value="ibex">IBEX 35</option>
+          <option value="dax">DAX 40</option>
+          <option value="nikkei">Nikkei 225</option>
+        </select>
+      </div>
+      <div class="chart-wrapper" style="height:320px; margin-top:16px;">
+        <canvas id="chartAnual" role="img" aria-label="Gráfico de rentabilidad anual"></canvas>
+      </div>
+    </div>
+
+    <!-- TABLA RESUMEN -->
+    <div class="card" style="margin-bottom:24px;">
+      <h2 data-i18n="idx.table.h2">Estadísticas 2010–2024</h2>
+      <div class="table-wrap">
+        <table id="tabla-indices">
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="idx.th.index">Índice</th>
+              <th scope="col" data-i18n="idx.th.region">Región</th>
+              <th scope="col" data-i18n="idx.th.avg">Rent. media anual</th>
+              <th scope="col" data-i18n="idx.th.best">Mejor año</th>
+              <th scope="col" data-i18n="idx.th.worst">Peor año</th>
+              <th scope="col" data-i18n="idx.th.final">10.000 € → hoy</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-indices-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECCIÓN EDUCATIVA -->
+    <section class="content-section">
+      <h2 class="content-h2" data-i18n="idx.edu.h2">¿Cómo interpretar estos datos?</h2>
+      <div class="content-grid">
+        <div>
+          <h3 style="font-size:0.92rem;font-weight:700;color:var(--text-1);margin-bottom:10px;" data-i18n="idx.edu.h3a">Rentabilidad pasada y futura</h3>
+          <p data-i18n="idx.edu.pa">Los datos históricos son una referencia útil pero no garantizan resultados futuros. Mercados como el S&P 500 han tenido periodos de caídas superiores al 50% (como en 2008-2009) seguidos de fuertes recuperaciones. La clave es mantener la inversión a largo plazo.</p>
+        </div>
+        <div>
+          <h3 style="font-size:0.92rem;font-weight:700;color:var(--text-1);margin-bottom:10px;" data-i18n="idx.edu.h3b">Divisa y cobertura</h3>
+          <p data-i18n="idx.edu.pb">Los índices americanos (S&P 500, NASDAQ) cotizan en USD. Un inversor europeo obtiene una rentabilidad diferente dependiendo de la evolución EUR/USD. Los datos mostrados son en moneda local de cada índice, sin cobertura de divisa.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-disclaimer">
+        <strong>Aviso:</strong> <span data-i18n="idx.footer.disc">Los datos de rentabilidad son aproximados y de carácter educativo. No constituyen asesoramiento financiero ni recomendación de inversión.</span>
+      </div>
+      <div class="footer-links">
+        <a href="privacidad.html" data-i18n="footer.privacy">Política de Privacidad y Cookies</a>
+        <span>·</span>
+        <span data-i18n="footer.copy">© 2026 Calculadora Financiera</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="indices.js"></script>
+  <script src="cookies.js"></script>
+  <script src="chat.js"></script>
+  <script src="i18n.js"></script>
+
+</body>
+</html>

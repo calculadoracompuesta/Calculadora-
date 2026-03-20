@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    document.documentElement.setAttribute('data-theme',
+        localStorage.getItem('theme') ||
+        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+    );
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Calculadora de interés compuesto gratuita. Simula el crecimiento de tu inversión con aportaciones mensuales, distintas frecuencias de capitalización y gráfico interactivo." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Calculadora Financiera" />
+  <link rel="canonical" href="https://calculadoracompuesta.netlify.app/" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:type"         content="website">
+  <meta property="og:title"        content="Calculadora de Interés Compuesto Gratuita">
+  <meta property="og:description"  content="Simula el crecimiento de tu inversión con aportaciones periódicas.">
+  <meta property="og:url"          content="https://calculadoracompuesta.netlify.app/">
+  <meta property="og:image"        content="https://calculadoracompuesta.netlify.app/og-image.png">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"    content="Calculadora de Interés Compuesto">
+  <meta property="og:locale"       content="es_ES">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Calculadora de Interés Compuesto Gratuita">
+  <meta name="twitter:description" content="Simula el crecimiento de tu inversión con aportaciones periódicas.">
+  <meta name="twitter:image"       content="https://calculadoracompuesta.netlify.app/og-image.png">
+
+  <title>Calculadora de Interés Compuesto Gratuita | Simula tu Inversión</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="cookies.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Calculadora de Interés Compuesto",
+        "url": "https://calculadoracompuesta.netlify.app/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "¿Qué es el interés compuesto?", "acceptedAnswer": { "@type": "Answer", "text": "El interés compuesto es el mecanismo por el cual los intereses generados se suman al capital principal, generando a su vez nuevos intereses." } },
+          { "@type": "Question", "name": "¿Con cuánto dinero puedo empezar a invertir?", "acceptedAnswer": { "@type": "Answer", "text": "Puedes empezar con cualquier cantidad. Muchos fondos indexados permiten empezar desde 1 €." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" data-i18n="nav.logo">Calculadora Financiera</a>
+      <div class="nav-links">
+        <a href="index.html"   class="nav-link active" data-i18n="nav.calc">Calculadora</a>
+        <a href="indices.html" class="nav-link"        data-i18n="nav.indices">Índices mundiales</a>
+        <a href="conversor.html" class="nav-link" data-i18n="nav.conversor">Conversor divisas</a>
+        <div class="nav-divider"></div>
+        <button class="nav-btn lang-btn" id="lang-toggle" onclick="toggleLang()" title="Switch language">EN</button>
+        <button class="nav-btn theme-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="header-label" data-i18n="header.label">Herramienta financiera gratuita</div>
+      <h1 data-i18n="header.h1">Calculadora de Interés Compuesto</h1>
+      <p data-i18n="header.p">Visualiza el crecimiento real de tu inversión con aportaciones periódicas y capitalización configurable. Resultados al instante, sin registro.</p>
+      <div class="header-stats">
+        <div class="stat"><span class="stat-num">50</span><span class="stat-desc" data-i18n="stat.years">años de proyección</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">5</span><span class="stat-desc" data-i18n="stat.freq">frecuencias de capitalización</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-desc" data-i18n="stat.free">gratuito y sin registro</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+
+      <!-- INPUTS -->
+      <div class="card">
+        <h2 data-i18n="form.h2">Configura tu simulación</h2>
+
+        <div class="field">
+          <label><span data-i18n="label.capital">Capital inicial</span>
+            <div class="val-wrap"><input type="number" id="capital-num" class="num-input" value="10000" min="100" max="500000" step="100" oninput="syncFromNumber('capital'); update()"><span class="unit">€</span></div>
+          </label>
+          <input type="range" id="capital" min="100" max="500000" step="100" value="10000" oninput="syncFromSlider('capital'); update()">
+        </div>
+
+        <div class="field">
+          <label><span data-i18n="label.aportacion">Aportación mensual</span>
+            <div class="val-wrap"><input type="number" id="aportacion-num" class="num-input" value="200" min="0" max="5000" step="50" oninput="syncFromNumber('aportacion'); update()"><span class="unit">€</span></div>
+          </label>
+          <input type="range" id="aportacion" min="0" max="5000" step="50" value="200" oninput="syncFromSlider('aportacion'); update()">
+        </div>
+
+        <div class="field">
+          <label><span data-i18n="label.tasa">Tasa de interés anual</span>
+            <div class="val-wrap"><input type="number" id="tasa-num" class="num-input" value="7" min="0.5" max="30" step="0.5" oninput="syncFromNumber('tasa'); update()"><span class="unit">%</span></div>
+          </label>
+          <input type="range" id="tasa" min="0.5" max="30" step="0.5" value="7" oninput="syncFromSlider('tasa'); update()">
+        </div>
+
+        <div class="field">
+          <label><span data-i18n="label.anos">Horizonte temporal</span>
+            <div class="val-wrap"><input type="number" id="anos-num" class="num-input" value="20" min="1" max="50" step="1" oninput="syncFromNumber('anos'); update()"><span class="unit" data-i18n="unit.years">años</span></div>
+          </label>
+          <input type="range" id="anos" min="1" max="50" step="1" value="20" oninput="syncFromSlider('anos'); update()">
+        </div>
+
+        <div class="field">
+          <label for="freq" data-i18n="label.freq">Frecuencia de capitalización</label>
+          <select id="freq" onchange="update()">
+            <option value="12"  data-i18n="freq.monthly">Mensual (12)</option>
+            <option value="4"   data-i18n="freq.quarterly">Trimestral (4)</option>
+            <option value="2"   data-i18n="freq.biannual">Semestral (2)</option>
+            <option value="1"   data-i18n="freq.annual" selected>Anual (1)</option>
+            <option value="365" data-i18n="freq.daily">Diaria (365)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="card">
+        <h2 data-i18n="results.h2">Resultados</h2>
+        <div class="results-grid">
+          <div class="result-box highlight"><div class="label" data-i18n="res.total">Capital Final</div><div class="value" id="res-total"></div></div>
+          <div class="result-box accent"><div class="label" data-i18n="res.interest">Intereses Ganados</div><div class="value" id="res-intereses"></div></div>
+          <div class="result-box purple"><div class="label" data-i18n="res.invested">Total Invertido</div><div class="value" id="res-invertido"></div></div>
+          <div class="result-box orange"><div class="label" data-i18n="res.multi">Multiplicador</div><div class="value" id="res-multi"></div></div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="myChart" role="img" aria-label="Gráfico de evolución del capital e intereses por año"></canvas>
+        </div>
+
+        <!-- BOTÓN COMPARTIR -->
+        <!-- BOTÓN COMPARTIR + EXPORTAR -->
+        <div class="share-row">
+          <button class="share-btn" id="share-btn" onclick="shareResult()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18" cy="5" r="3"></circle>
+                  <circle cx="6" cy="12" r="3"></circle>
+                  <circle cx="18" cy="19" r="3"></circle>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="7.49"></line>
+                  <line x1="15.41" y1="16.51" x2="8.59" y2="10.49"></line>
+              </svg>
+              <span id="share-btn-text" data-i18n="share.btn">Compartir simulación</span>
+          </button>
+
+          <button class="share-btn" id="export-chart-btn" onclick="exportChartPNG()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="14" rx="2" ry="2"></rect>
+                  <polyline points="3 17 9 11 13 15 17 11 21 15"></polyline>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+              </svg>
+              <span id="export-chart-text" data-i18n="export.btn">Exportar gráfico (PNG)</span>
+          </button>
+
+          <div class="share-toast" id="share-toast" aria-live="polite">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span data-i18n="share.copied">Enlace copiado!</span>
+          </div>
+
+          <div class="share-toast" id="export-toast" aria-live="polite">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span data-i18n="export.saved">Gráfico descargado</span>
+          </div>
+      </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLA ANUAL -->
+    <div class="card" style="margin-top:24px">
+      <h2 data-i18n="table.h2">Evolución anual</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th scope="col" data-i18n="th.year">Año</th>
+            <th scope="col" data-i18n="th.capital">Capital aportado</th>
+            <th scope="col" data-i18n="th.contributions">Aportaciones</th>
+            <th scope="col" data-i18n="th.interest">Intereses</th>
+            <th scope="col" data-i18n="th.total">Total acumulado</th>
+          </tr></thead>
+          <tbody id="tabla-cuerpo"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 1: Qué es -->
+    <section class="content-section" aria-labelledby="sec-que-es">
+      <h2 id="sec-que-es" class="content-h2" data-i18n="sec1.h2">¿Qué es el interés compuesto y cómo funciona?</h2>
+      <div class="content-grid">
+        <div>
+          <p data-i18n="sec1.p1">El interés compuesto es el mecanismo financiero por el cual los intereses generados en cada periodo se suman al capital principal, generando a su vez nuevos intereses en el siguiente ciclo.</p>
+          <p style="margin-top:14px" data-i18n="sec1.p2">Este principio es la base de la mayoría de productos de inversión a largo plazo: fondos indexados, ETFs, planes de pensiones y cuentas de ahorro con reinversión automática de dividendos.</p>
+        </div>
+        <div class="example-box">
+          <div class="example-title" data-i18n="ex.title">Ejemplo real con valores por defecto</div>
+          <ul class="example-list">
+            <li><span data-i18n="ex.capital">Capital inicial</span><strong>10.000 €</strong></li>
+            <li><span data-i18n="ex.monthly">Aportación mensual</span><strong>200 €</strong></li>
+            <li><span data-i18n="ex.rate">Tasa anual</span><strong>7%</strong></li>
+            <li><span data-i18n="ex.period">Período</span><strong>20 años</strong></li>
+            <li class="divider"></li>
+            <li><span data-i18n="ex.total">Total aportado</span><strong>58.000 €</strong></li>
+            <li><span data-i18n="ex.final">Capital final</span><strong class="highlight-val">~152.000 €</strong></li>
+            <li><span data-i18n="ex.interest">Intereses generados</span><strong class="green-val">~94.000 €</strong></li>
+          </ul>
+          <p class="example-note" data-i18n="ex.note">Los intereses superan el 160% de lo aportado gracias a la capitalización compuesta.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: Frecuencias -->
+    <section class="content-section" aria-labelledby="sec-frecuencias">
+      <h2 id="sec-frecuencias" class="content-h2" data-i18n="sec2.h2">Impacto de la frecuencia de capitalización</h2>
+      <p class="content-lead" data-i18n="sec2.lead">La misma inversión de 10.000 € al 7% durante 20 años produce resultados distintos según la frecuencia con la que se reinvierten los intereses:</p>
+      <div class="table-wrap" style="margin-top:20px">
+        <table>
+          <thead><tr>
+            <th scope="col" data-i18n="th.freq">Frecuencia</th>
+            <th scope="col" data-i18n="th.periods">Períodos/año</th>
+            <th scope="col" data-i18n="th.finalcap">Capital final</th>
+            <th scope="col" data-i18n="th.diff">Diferencia vs. anual</th>
+          </tr></thead>
+          <tbody>
+            <tr><td data-i18n="freq.r.annual">Anual</td><td>1</td><td>38.697 €</td><td>—</td></tr>
+            <tr><td data-i18n="freq.r.biannual">Semestral</td><td>2</td><td>39.006 €</td><td class="pos">+309 €</td></tr>
+            <tr><td data-i18n="freq.r.quarterly">Trimestral</td><td>4</td><td>39.165 €</td><td class="pos">+468 €</td></tr>
+            <tr><td data-i18n="freq.r.monthly">Mensual</td><td>12</td><td>39.271 €</td><td class="pos">+574 €</td></tr>
+            <tr><td data-i18n="freq.r.daily">Diaria</td><td>365</td><td>39.312 €</td><td class="pos">+615 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="content-note" data-i18n="sec2.note">* Sin aportaciones mensuales. Capital inicial: 10.000 €, tasa: 7%, plazo: 20 años.</p>
+    </section>
+
+    <!-- SECCIÓN 3: Acordeón -->
+    <section class="accordion-section" aria-labelledby="sec-aprende">
+      <h2 id="sec-aprende" class="content-h2" data-i18n="sec3.h2">Claves para maximizar tu inversión</h2>
+      <div class="accordion"><button class="accordion-btn" aria-expanded="false" aria-controls="acc-1"><span data-i18n="acc1.title">El tiempo es tu mayor aliado</span><span class="accordion-icon" aria-hidden="true"></span></button><div class="accordion-body" id="acc-1" role="region"><p data-i18n="acc1.body">Empezar a invertir 10 años antes puede duplicar o incluso triplicar tu capital final.</p></div></div>
+      <div class="accordion"><button class="accordion-btn" aria-expanded="false" aria-controls="acc-2"><span data-i18n="acc2.title">Estrategia de aportaciones periódicas (DCA)</span><span class="accordion-icon" aria-hidden="true"></span></button><div class="accordion-body" id="acc-2" role="region"><p data-i18n="acc2.body">El Dollar Cost Averaging (DCA) o inversión periódica consiste en aportar una cantidad fija cada mes.</p></div></div>
+      <div class="accordion"><button class="accordion-btn" aria-expanded="false" aria-controls="acc-3"><span data-i18n="acc3.title">¿Dónde invertir para obtener interés compuesto?</span><span class="accordion-icon" aria-hidden="true"></span></button><div class="accordion-body" id="acc-3" role="region"><p data-i18n="acc3.body">Los fondos indexados y ETFs que replican índices como el S&P 500 o el MSCI World son los vehículos más eficientes.</p></div></div>
+    </section>
+
+    <!-- SECCIÓN 4: FAQ -->
+    <section class="content-section" aria-labelledby="sec-faq">
+      <h2 id="sec-faq" class="content-h2" data-i18n="sec4.h2">Preguntas frecuentes sobre el interés compuesto</h2>
+      <div class="faq-list">
+        <div class="faq-item"><h3 class="faq-q" data-i18n="faq1.q">¿Qué es exactamente el interés compuesto?</h3><p class="faq-a" data-i18n="faq1.a">El interés compuesto es el proceso por el cual los intereses generados en cada período se suman al capital y generan a su vez nuevos intereses.</p></div>
+        <div class="faq-item"><h3 class="faq-q" data-i18n="faq2.q">¿Con cuánto dinero puedo empezar a invertir?</h3><p class="faq-a" data-i18n="faq2.a">Puedes empezar con cualquier cantidad. La mayoría de los brokers modernos permiten empezar desde 1 €.</p></div>
+        <div class="faq-item"><h3 class="faq-q" data-i18n="faq3.q">¿Qué rentabilidad anual es realista esperar?</h3><p class="faq-a" data-i18n="faq3.a">El S&P 500 ha ofrecido una rentabilidad media anual de aproximadamente un 10% en términos nominales en los últimos 50 años.</p></div>
+        <div class="faq-item"><h3 class="faq-q" data-i18n="faq4.q">¿Qué diferencia hay entre capitalización mensual y anual?</h3><p class="faq-a" data-i18n="faq4.a">La capitalización mensual calcula y reinvierte los intereses cada mes, mientras que la anual lo hace una vez al año.</p></div>
+        <div class="faq-item"><h3 class="faq-q" data-i18n="faq5.q">¿Qué es el multiplicador que muestra la calculadora?</h3><p class="faq-a" data-i18n="faq5.a">El multiplicador indica cuántas veces has multiplicado tu dinero respecto al total que has aportado.</p></div>
+        <div class="faq-item"><h3 class="faq-q" data-i18n="faq6.q">¿Los resultados tienen en cuenta la inflación?</h3><p class="faq-a" data-i18n="faq6.a">No, los resultados son en términos nominales. Para ver el valor real, resta la inflación esperada a la tasa de rentabilidad.</p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-disclaimer">
+        <strong>Aviso:</strong> <span data-i18n="footer.disclaimer">Aviso legal: Esta calculadora tiene carácter exclusivamente informativo y educativo.</span>
+      </div>
+      <div class="footer-links">
+        <a href="privacidad.html" data-i18n="footer.privacy">Política de Privacidad y Cookies</a>
+        <span>·</span>
+        <span data-i18n="footer.copy">© 2026 Calculadora Financiera · Actualizado en marzo de 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="script.js"></script>
+  <script src="cookies.js"></script>
+  <script src="i18n.js"></script>
+
+</body>
+</html>

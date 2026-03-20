@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+    );
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <title data-i18n="priv.page.title">Política de Privacidad y Cookies | Calculadora Financiera</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="cookies.css" />
+
+  <style>
+    .legal-container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    .legal-header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .legal-header .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--text-3);
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: color 0.15s;
+    }
+    .legal-header .back-link:hover { color: var(--accent); }
+    .legal-header h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-1);
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+    .legal-header .meta { font-size: 0.8rem; color: var(--text-3); }
+    .legal-section { margin-bottom: 40px; }
+    .legal-section h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      text-transform: none;
+      letter-spacing: -0.01em;
+    }
+    .legal-section h3 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-1);
+      margin: 18px 0 8px;
+    }
+    .legal-section p {
+      font-size: 0.88rem;
+      color: var(--text-2);
+      line-height: 1.85;
+      margin-bottom: 12px;
+    }
+    .legal-section ul {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    .legal-section ul li {
+      font-size: 0.88rem;
+      color: var(--text-2);
+      line-height: 1.8;
+      margin-bottom: 6px;
+    }
+    .legal-section a { color: var(--accent); text-decoration: none; }
+    .legal-section a:hover { text-decoration: underline; }
+    .info-box {
+      background: var(--surface);
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin: 16px 0;
+    }
+    .info-box p { margin-bottom: 0; }
+    .info-box strong { color: var(--text-1); }
+    .cookie-table-wrap { overflow-x: auto; margin: 16px 0; }
+    .cookie-table-wrap table { min-width: 560px; }
+    .reopen-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border-mid);
+      color: var(--text-1);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      margin-top: 10px;
+    }
+    .reopen-btn:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+    /* Mini nav igual que index */
+    .priv-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-subtle);
+    }
+    .priv-nav-left a {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-1);
+      text-decoration: none;
+    }
+    .priv-nav-right { display: flex; gap: 8px; align-items: center; }
+    .priv-nav-right button {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .priv-nav-right button:hover { border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- Nav con selector de idioma y tema -->
+  <nav class="priv-nav">
+    <div class="priv-nav-left">
+      <a href="/">&#8592; <span data-i18n="nav.logo">Calculadora Financiera</span></a>
+    </div>
+    <div class="priv-nav-right">
+      <button id="lang-toggle" onclick="toggleLang()">EN</button>
+      <button onclick="toggleTheme()" id="theme-toggle" aria-label="Toggle theme">&#9788;</button>
+    </div>
+  </nav>
+
+  <main class="legal-container">
+
+    <div class="legal-header">
+      <h1 data-i18n="priv.h1">Política de Privacidad y Cookies</h1>
+      <p class="meta" data-i18n="priv.meta">Última actualización: marzo de 2026 · Versión 1.0</p>
+    </div>
+
+    <!-- 1. RESPONSABLE -->
+    <div class="legal-section">
+      <h2 data-i18n="priv.s1.h2">1. Responsable del tratamiento</h2>
+      <div class="info-box">
+        <p>
+          <strong data-i18n="priv.s1.owner.label">Titular del sitio web:</strong> Rubén Añover López<br>
+          <strong data-i18n="priv.s1.email.label">Correo electrónico de contacto:</strong>
+          <a href="mailto:calculadoracompuesta@gmail.com">calculadoracompuesta@gmail.com</a><br>
+          <strong data-i18n="priv.s1.web.label">Sitio web:</strong>
+          <a href="https://TU-DOMINIO.com">https://TU-DOMINIO.com</a><br>
+          <strong data-i18n="priv.s1.country.label">País:</strong> <span data-i18n="priv.s1.country.val">España</span><br>
+          <strong data-i18n="priv.s1.address.label">Dirección postal:</strong> <span data-i18n="priv.s1.address.val">Disponible previa solicitud por correo electrónico.</span>
+        </p>
+      </div>
+      <p data-i18n="priv.s1.p">En cumplimiento del Reglamento (UE) 2016/679 (RGPD), la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD) y la Ley 34/2002 de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI-CE), se informa al usuario de la política de privacidad y cookies aplicada en este sitio web.</p>
+    </div>
+
+    <!-- 2. DATOS -->
+    <div class="legal-section">
+      <h2 data-i18n="priv.s2.h2">2. Datos personales que se tratan</h2>
+      <p data-i18n="priv.s2.p1">Este sitio web no recoge datos personales directamente. No existe formulario de registro, ni suscripción, ni área privada. Los únicos datos que pueden tratarse son los generados de forma automática mediante el uso de cookies de terceros (Google), que se detallan en el apartado 5.</p>
+      <p data-i18n="priv.s2.p2">Los valores que el usuario introduce en la calculadora (capital, tasa de interés, años) no se envían a ningún servidor y se procesan exclusivamente en el navegador del usuario.</p>
+    </div>
+
+    <!-- 3. FINALIDAD -->
+    <div class="legal-section">
+      <h2 data-i18n="priv.s3.h2">3. Finalidad del tratamiento y base legal</h2>
+      <div class="cookie-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="priv.s3.th1">Finalidad</th>
+              <th scope="col" data-i18n="priv.s3.th2">Base legal</th>
+              <th scope="col" data-i18n="priv.s3.th3">Tercero implicado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-i18n="priv.s3.r1c1">Mostrar publicidad personalizada</td>
+              <td data-i18n="priv.s3.r1c2">Consentimiento (Art. 6.1.a RGPD)</td>
+              <td>Google AdSense</td>
+            </tr>
+            <tr>
+              <td data-i18n="priv.s3.r2c1">Análisis de tráfico web</td>
+              <td data-i18n="priv.s3.r2c2">Consentimiento (Art. 6.1.a RGPD)</td>
+              <td>Google Analytics</td>
+            </tr>
+            <tr>
+              <td data-i18n="priv.s3.r3c1">Funcionamiento técnico del sitio</td>
+              <td data-i18n="priv.s3.r3c2">Interés legítimo (Art. 6.1.f RGPD)</td>
+              <td>Netlify</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4. DESTINATARIOS -->
+    <div class="legal-section">
+      <h2 data-i18n="priv.s4.h2">4. Destinatarios y transferencias internacionales</h2>
+      <p data-i18n="priv.s4.p">Los datos pueden ser transferidos a los siguientes terceros:</p>
+      <ul>
+        <li data-i18n="priv.s4.li1"><strong>Google LLC</strong> (EE.UU.) — para los servicios de Google AdSense y Google Analytics. Google está adherido a las garantías adecuadas para transferencias internacionales (Decisión de Adecuación UE-EE.UU. — Data Privacy Framework).</li>
+        <li data-i18n="priv.s4.li2"><strong>Netlify, Inc.</strong> (EE.UU.) — proveedor de alojamiento web. Los servidores pueden estar ubicados en la UE o EE.UU. según la configuración del CDN.</li>
+      </ul>
+      <p data-i18n="priv.s4.p2">No se realizan otras transferencias internacionales de datos personales.</p>
+    </div>
+
+    <!-- 5. COOKIES -->
+    <div class="legal-section">
+      <h2 data-i18n="priv.s5.h2">5. Política de Cookies</h2>
+      <p data-i18n="priv.s5.intro">Una cookie es un pequeño fichero de texto que se almacena en el navegador del usuario cuando visita un sitio web. Este sitio utiliza cookies propias y de terceros para los fines descritos a continuación.</p>
+
+      <h3 data-i18n="priv.s5.h3a">5.1 Cookies técnicas (exentas de consentimiento)</h3>
+      <div class="cookie-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="priv.tbl.name">Nombre</th>
+              <th data-i18n="priv.tbl.provider">Proveedor</th>
+              <th data-i18n="priv.tbl.purpose">Finalidad</th>
+              <th data-i18n="priv.tbl.duration">Duración</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>cookie_consent</code></td>
+              <td data-i18n="priv.own">Propio</td>
+              <td data-i18n="priv.s5.t1r1">Guardar las preferencias de cookies del usuario</td>
+              <td data-i18n="priv.1year">1 año</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 data-i18n="priv.s5.h3b">5.2 Cookies analíticas (requieren consentimiento)</h3>
+      <div class="cookie-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="priv.tbl.name">Nombre</th>
+              <th data-i18n="priv.tbl.provider">Proveedor</th>
+              <th data-i18n="priv.tbl.purpose">Finalidad</th>
+              <th data-i18n="priv.tbl.duration">Duración</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>_ga</code></td>
+              <td>Google Analytics</td>
+              <td data-i18n="priv.s5.t2r1">Distinguir usuarios únicos</td>
+              <td data-i18n="priv.2years">2 años</td>
+            </tr>
+            <tr>
+              <td><code>_ga_*</code></td>
+              <td>Google Analytics</td>
+              <td data-i18n="priv.s5.t2r2">Mantener estado de sesión</td>
+              <td data-i18n="priv.2years">2 años</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 data-i18n="priv.s5.h3c">5.3 Cookies publicitarias (requieren consentimiento)</h3>
+      <div class="cookie-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="priv.tbl.name">Nombre</th>
+              <th data-i18n="priv.tbl.provider">Proveedor</th>
+              <th data-i18n="priv.tbl.purpose">Finalidad</th>
+              <th data-i18n="priv.tbl.duration">Duración</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>IDE</code></td>
+              <td>Google AdSense / DoubleClick</td>
+              <td data-i18n="priv.s5.t3r1">Publicidad personalizada</td>
+              <td data-i18n="priv.1year">1 año</td>
+            </tr>
+            <tr>
+              <td><code>test_cookie</code></td>
+              <td>Google AdSense</td>
+              <td data-i18n="priv.s5.t3r2">Comprobar si el navegador acepta cookies</td>
+              <td data-i18n="priv.session">Sesión</td>
+            </tr>
+            <tr>
+              <td><code>ANID</code></td>
+              <td>Google</td>
+              <td data-i18n="priv.s5.t3r3">Publicidad basada en intereses</td>
+              <td data-i18n="priv.1year">1 año</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p data-i18n-html="priv.s5.google">Para más información sobre las cookies de Google, consulta su <a href="https://policies.google.com/technologies/cookies?hl=es" target="_blank" rel="noopener">política de cookies</a>.</p>
+
+      <h3 data-i18n="priv.s5.h3d">5.4 Gestión de preferencias</h3>
+      <p data-i18n="priv.s5.manage">Puedes revisar y cambiar tus preferencias de cookies en cualquier momento:</p>
+      <button class="reopen-btn" onclick="reopenCookieBanner()">
+        &#9881; <span data-i18n="priv.s5.reopen">Gestionar preferencias de cookies</span>
+      </button>
+      <p style="margin-top:14px;" data-i18n="priv.s5.browser">También puedes desactivar las cookies desde la configuración de tu navegador:</p>
+      <ul>
+        <li><a href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank" rel="noopener">Google Chrome</a></li>
+        <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+        <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a></li>
+        <li><a href="https://support.microsoft.com/es-es/windows/eliminar-y-administrar-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Microsoft Edge</a></li>
+      </ul>
+    </div>
+
+    <!-- 6. DERECHOS -->
+    <div class="legal-section">
+      <h2 data-i18n="priv.s6.h2">6. Derechos del usuario</h2>
+      <p data-i18n="priv.s6.p">De acuerdo con el RGPD y la LOPDGDD, el usuario tiene derecho a:</p>
+      <ul>
+        <li data-i18n="priv.s6.li1"><strong>Acceso:</strong> conocer qué datos personales se tratan.</li>
+        <li data-i18n="priv.s6.li2"><strong>Rectificación:</strong> corregir datos inexactos.</li>
+        <li data-i18n="priv.s6.li3"><strong>Supresión:</strong> solicitar la eliminación de sus datos.</li>
+        <li data-i18n="priv.s6.li4"><strong>Limitación:</strong> solicitar que se restrinja el tratamiento.</li>
+        <li data-i18n="priv.s6.li5"><strong>Portabilidad:</strong> recibir sus datos en formato estructurado.</li>
+        <li data-i18n="priv.s6.li6"><strong>Oposición:</strong> oponerse al tratamiento basado en interés legítimo.</li>
+        <li data-i18n="priv.s6.li7"><strong>Retirar el consentimiento</strong> en cualquier momento, sin que ello afecte a la licitud del tratamiento previo.</li>
+      </ul>
+      <p data-i18n-html="priv.s6.contact">Para ejercer estos derechos, contacta en: <a href="mailto:calculadoracompuesta@gmail.com">calculadoracompuesta@gmail.com</a>. También tienes derecho a presentar una reclamación ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong>: <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>.</p>
+    </div>
+
+    <!-- 7. CONSERVACIÓN -->
+    <div class="legal-section">
+      <h2 data-i18n="priv.s7.h2">7. Plazos de conservación</h2>
+      <p data-i18n="priv.s7.p">Los datos asociados a cookies analíticas y publicitarias se conservan durante el período indicado en la tabla del apartado 5, o hasta que el usuario retire su consentimiento. Los registros de acceso del servidor (logs de Netlify) se conservan durante un máximo de 30 días.</p>
+    </div>
+
+    <!-- 8. CAMBIOS -->
+    <div class="legal-section">
+      <h2 data-i18n="priv.s8.h2">8. Cambios en esta política</h2>
+      <p data-i18n="priv.s8.p">Esta política puede actualizarse para adaptarse a cambios normativos o en los servicios utilizados. La fecha de última actualización siempre aparecerá indicada en la cabecera del documento. El uso continuado del sitio tras la publicación de cambios implica la aceptación de la nueva versión.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-copy">
+        <span data-i18n="footer.copy">© 2026 Calculadora Financiera</span>
+        · <a href="/" style="color:var(--text-3);" data-i18n="priv.backlink">Volver a la calculadora</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="cookies.js"></script>
+  <script src="i18n.js"></script>
+
+</body>
+</html>
