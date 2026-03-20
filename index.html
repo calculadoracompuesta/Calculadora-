@@ -44,26 +44,75 @@
   <link rel="stylesheet" href="cookies.css" />
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebApplication",
-        "name": "Calculadora de Interés Compuesto",
-        "url": "https://calculadoracompuesta.netlify.app/",
-        "applicationCategory": "FinanceApplication",
-        "operatingSystem": "All",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          { "@type": "Question", "name": "¿Qué es el interés compuesto?", "acceptedAnswer": { "@type": "Answer", "text": "El interés compuesto es el mecanismo por el cual los intereses generados se suman al capital principal, generando a su vez nuevos intereses." } },
-          { "@type": "Question", "name": "¿Con cuánto dinero puedo empezar a invertir?", "acceptedAnswer": { "@type": "Answer", "text": "Puedes empezar con cualquier cantidad. Muchos fondos indexados permiten empezar desde 1 €." } }
-        ]
-      }
-    ]
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Calculadora de Interés Compuesto",
+      "url": "https://calculadoracompuesta.netlify.app/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es exactamente el interés compuesto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El interés compuesto es el proceso por el cual los intereses generados en cada período se suman al capital y generan a su vez nuevos intereses. Es el mecanismo financiero más potente para hacer crecer el dinero a largo plazo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Con cuánto dinero puedo empezar a invertir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes empezar con cualquier cantidad. La mayoría de los brokers modernos permiten empezar desde 1 €. Lo importante es la constancia y el tiempo, no la cantidad inicial."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué rentabilidad anual es realista esperar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El S&P 500 ha ofrecido una rentabilidad media anual de aproximadamente un 10% en términos nominales en los últimos 50 años. Para proyecciones conservadoras se suele usar entre un 6% y un 8% anual."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué diferencia hay entre capitalización mensual y anual?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La capitalización mensual calcula y reinvierte los intereses cada mes, mientras que la anual lo hace una vez al año. Cuanto más frecuente sea la capitalización, mayor será el capital final acumulado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el multiplicador que muestra la calculadora?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El multiplicador indica cuántas veces has multiplicado tu dinero respecto al total que has aportado. Por ejemplo, un multiplicador de 2,5x significa que tu capital final es 2,5 veces mayor que todo lo invertido."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los resultados tienen en cuenta la inflación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, los resultados son en términos nominales. Para ver el valor real ajustado a la inflación, resta la inflación esperada (habitualmente entre 2% y 3%) a la tasa de rentabilidad que introduces en la calculadora."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+  
   </script>
 </head>
 <body>
