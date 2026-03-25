@@ -1,10 +1,10 @@
 /* ════════════════════════════════════════
-   CONVERSOR DE DIVISAS
+   CONVERSOR DE DIVISAS — Professional
    ════════════════════════════════════════ */
 
 /* ── Tarjeta principal ── */
 .conv-card {
-  max-width: 620px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
@@ -12,22 +12,25 @@
 .conv-status {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 0.85rem;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 0;
+  font-size: 0.8rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  letter-spacing: 0.2px;
 }
 .conv-loading {
-  background: rgba(99,102,241,0.1);
-  color: var(--accent, #6366f1);
-  border: 1px solid rgba(99,102,241,0.2);
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-glow);
+  border-left: 3px solid var(--accent);
 }
 .conv-error {
-  background: rgba(239,68,68,0.1);
+  background: rgba(239,68,68,0.06);
   color: #ef4444;
-  border: 1px solid rgba(239,68,68,0.2);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-left: 3px solid #ef4444;
 }
 
 /* ── Filas del conversor ── */
@@ -44,37 +47,39 @@
 .conv-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 .conv-field label {
-  font-size: 0.78rem;
+  font-size: 0.67rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-2, #8b9cc8);
+  letter-spacing: 1.5px;
+  color: var(--text-3);
 }
 .conv-field input,
 .conv-field select {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1.5px solid var(--border, rgba(255,255,255,0.08));
-  background: var(--bg-input, rgba(255,255,255,0.04));
-  color: var(--text-1, #f0f4ff);
-  font-size: 1.05rem;
+  padding: 10px 12px;
+  border-radius: 0;
+  border: 1px solid var(--border-mid);
+  background: var(--surface-hi);
+  color: var(--text-1);
+  font-size: 1rem;
   font-weight: 600;
   font-family: inherit;
-  transition: border-color 0.2s;
+  transition: border-color 0.15s;
   box-sizing: border-box;
+  font-variant-numeric: tabular-nums;
 }
 .conv-field input:focus,
 .conv-field select:focus {
   outline: none;
-  border-color: var(--accent, #6366f1);
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 .conv-field select {
   cursor: pointer;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
 }
 
 /* ── Fila swap ── */
@@ -90,52 +95,59 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1.5px solid var(--border, rgba(255,255,255,0.08));
-  background: var(--bg-card, #111827);
-  color: var(--accent, #6366f1);
+  width: 36px;
+  height: 36px;
+  border-radius: 0;
+  border: 1px solid var(--border-mid);
+  background: var(--surface);
+  color: var(--accent);
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+  transition: background 0.15s, border-color 0.15s;
   flex-shrink: 0;
 }
 .conv-swap-btn:hover {
-  background: rgba(99,102,241,0.15);
-  border-color: var(--accent, #6366f1);
-  transform: rotate(180deg);
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+.conv-swap-btn:active {
+  transform: scaleX(-1);
 }
 
 .conv-rate-badge {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: var(--accent, #6366f1);
-  background: rgba(99,102,241,0.1);
-  border: 1px solid rgba(99,102,241,0.2);
+  color: var(--text-2);
+  background: var(--surface-mid);
+  border: 1px solid var(--border-mid);
+  border-left: 3px solid var(--accent);
   padding: 5px 12px;
-  border-radius: 20px;
+  border-radius: 0;
   white-space: nowrap;
   min-height: 28px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.2px;
 }
 
 /* ── Última actualización ── */
 .conv-updated {
-  margin-top: 14px;
-  font-size: 0.76rem;
-  color: var(--text-2, #8b9cc8);
-  text-align: center;
+  margin-top: 12px;
+  font-size: 0.73rem;
+  color: var(--text-3);
+  text-align: left;
+  letter-spacing: 0.2px;
 }
 
 /* ── Badge en tabla ── */
 .currency-badge {
   display: inline-block;
-  padding: 2px 8px;
-  border-radius: 6px;
-  background: rgba(99,102,241,0.12);
-  color: var(--accent, #6366f1);
-  font-size: 0.8rem;
+  padding: 2px 7px;
+  border-radius: 0;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.73rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 1px;
+  border: 1px solid var(--accent-glow);
 }
 
 /* ── Spinner ── */
@@ -144,40 +156,17 @@
 }
 .spin { animation: spin 0.9s linear infinite; }
 
-/* ── Tema light ── */
+/* ── Light mode ── */
 [data-theme="light"] .conv-field input,
 [data-theme="light"] .conv-field select {
-  background: #f9fafb;
-  color: #111827;
-  border-color: #e5e7eb;
+  background: var(--surface-hi);
+  color: var(--text-1);
+  border-color: var(--border-mid);
 }
 [data-theme="light"] .conv-swap-btn {
-  background: #ffffff;
-  border-color: #e5e7eb;
+  background: var(--surface);
+  border-color: var(--border-mid);
 }
 [data-theme="light"] .conv-rate-badge {
-  background: rgba(99,102,241,0.08);
-}
-/* ── Arreglo selects en tema oscuro ── */
-[data-theme="dark"] .conv-field select {
-  background: rgba(255,255,255,0.08) !important;
-  color: #f0f4ff !important;
-  border-color: rgba(255,255,255,0.15) !important;
-}
-
-[data-theme="dark"] .conv-field select option {
-  background: #0f1628 !important;
-  color: #f0f4ff !important;
-}
-
-/* ── Tema claro ── */
-[data-theme="light"] .conv-field select {
-  background: #ffffff !important;
-  color: #111827 !important;
-  border-color: #d1d5db !important;
-}
-
-[data-theme="light"] .conv-field select option {
-  background: #ffffff !important;
-  color: #111827 !important;
+  background: var(--surface-mid);
 }
