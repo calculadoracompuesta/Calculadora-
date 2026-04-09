@@ -20,16 +20,18 @@
   margin-bottom: 18px;
   letter-spacing: 0.2px;
 }
+
 .conv-loading {
   background: var(--accent-soft);
   color: var(--accent);
   border: 1px solid var(--accent-glow);
   border-left: 3px solid var(--accent);
 }
+
 .conv-error {
-  background: rgba(239,68,68,0.06);
+  background: rgba(239, 68, 68, 0.06);
   color: #ef4444;
-  border: 1px solid rgba(239,68,68,0.15);
+  border: 1px solid rgba(239, 68, 68, 0.15);
   border-left: 3px solid #ef4444;
 }
 
@@ -40,8 +42,11 @@
   gap: 14px;
   margin-bottom: 6px;
 }
+
 @media (max-width: 480px) {
-  .conv-row { grid-template-columns: 1fr; }
+  .conv-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .conv-field {
@@ -49,6 +54,7 @@
   flex-direction: column;
   gap: 5px;
 }
+
 .conv-field label {
   font-size: 0.67rem;
   font-weight: 700;
@@ -56,6 +62,7 @@
   letter-spacing: 1.5px;
   color: var(--text-3);
 }
+
 .conv-field input,
 .conv-field select {
   width: 100%;
@@ -71,12 +78,14 @@
   box-sizing: border-box;
   font-variant-numeric: tabular-nums;
 }
+
 .conv-field input:focus,
 .conv-field select:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: inset 0 0 0 1px var(--accent);
 }
+
 .conv-field select {
   cursor: pointer;
   font-size: 0.86rem;
@@ -105,10 +114,12 @@
   transition: background 0.15s, border-color 0.15s;
   flex-shrink: 0;
 }
+
 .conv-swap-btn:hover {
   background: var(--accent-soft);
   border-color: var(--accent);
 }
+
 .conv-swap-btn:active {
   transform: scaleX(-1);
 }
@@ -152,9 +163,14 @@
 
 /* ── Spinner ── */
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
-.spin { animation: spin 0.9s linear infinite; }
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
 
 /* ── Light mode ── */
 [data-theme="light"] .conv-field input,
@@ -163,10 +179,12 @@
   color: var(--text-1);
   border-color: var(--border-mid);
 }
+
 [data-theme="light"] .conv-swap-btn {
   background: var(--surface);
   border-color: var(--border-mid);
 }
+
 [data-theme="light"] .conv-rate-badge {
   background: var(--surface-mid);
 }

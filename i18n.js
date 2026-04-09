@@ -216,10 +216,21 @@ const TRANSLATIONS = {
     'conv.edu.p2':          'Los datos provienen de la API de Frankfurter con los tipos de referencia oficiales del BCE cada día hábil. El tipo real en un banco incluirá una comisión adicional del 1–3%.',
     'conv.edu.box.title':   'Monedas principales',
     'conv.footer.disc':     'Los tipos de cambio mostrados son de referencia (BCE) y pueden diferir del tipo aplicado por entidades financieras. No constituyen asesoramiento financiero.',
-
+    'curr.eur': '🇪🇺 Eurozona',
+    'curr.usd': '🇺🇸 EE.UU.',
+    'curr.gbp': '🇬🇧 Reino Unido',
+    'curr.jpy': '🇯🇵 Japón',
+    'curr.chf': '🇨🇭 Suiza',
+    'curr.cny': '🇨🇳 China',
   },
 
   en: {
+    'curr.eur': '🇪🇺 Eurozone',
+    'curr.usd': '🇺🇸 USA',
+    'curr.gbp': '🇬🇧 United Kingdom',
+    'curr.jpy': '🇯🇵 Japan',
+    'curr.chf': '🇨🇭 Switzerland',
+    'curr.cny': '🇨🇳 China',
     'page.title':       'Free Compound Interest Calculator | Investment Simulator',
     'nav.logo':         'Financial Calculator',
     'nav.calc':         'Calculator',

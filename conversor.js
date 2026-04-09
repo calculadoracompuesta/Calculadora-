@@ -133,7 +133,7 @@ function populateSelects() {
   const codes = ['EUR', ...Object.keys(CURRENCIES).filter(c => c !== 'EUR')];
 
   const fromSel = document.getElementById('currency-from');
-  const toSel   = document.getElementById('currency-to');
+  const toSel = document.getElementById('currency-to');
 
   [fromSel, toSel].forEach((sel, i) => {
     const prev = sel.value;
@@ -158,8 +158,8 @@ function getRate(from, to) {
 
 function convertFrom() {
   if (!Object.keys(rates).length) return;
-  const from   = document.getElementById('currency-from').value;
-  const to     = document.getElementById('currency-to').value;
+  const from = document.getElementById('currency-from').value;
+  const to = document.getElementById('currency-to').value;
   const amount = parseFloat(document.getElementById('amount-from').value) || 0;
   const result = amount * getRate(from, to);
   document.getElementById('amount-to').value = formatAmount(result);
@@ -168,8 +168,8 @@ function convertFrom() {
 
 function convertTo() {
   if (!Object.keys(rates).length) return;
-  const from   = document.getElementById('currency-from').value;
-  const to     = document.getElementById('currency-to').value;
+  const from = document.getElementById('currency-from').value;
+  const to = document.getElementById('currency-to').value;
   const amount = parseFloat(document.getElementById('amount-to').value) || 0;
   const result = amount * getRate(to, from);
   document.getElementById('amount-from').value = formatAmount(result);
@@ -178,7 +178,7 @@ function convertTo() {
 
 function swapCurrencies() {
   const fromSel = document.getElementById('currency-from');
-  const toSel   = document.getElementById('currency-to');
+  const toSel = document.getElementById('currency-to');
   [fromSel.value, toSel.value] = [toSel.value, fromSel.value];
   convertFrom();
 }
@@ -192,14 +192,14 @@ function updateRateBadge(from, to) {
 
 // ── Tabla de tipos cruzados ───────────────────────────────────
 function renderRatesTable() {
-  const lang  = localStorage.getItem('lang') || 'es';
+  const lang = localStorage.getItem('lang') || 'es';
   const names = lang === 'en' ? CURRENCIES_EN : CURRENCIES;
   const tbody = document.getElementById('rates-tbody');
   if (!tbody) return;
   tbody.innerHTML = '';
   Object.keys(CURRENCIES).forEach(code => {
     if (rates[code] === undefined) return;
-    const rate    = rates[code];
+    const rate = rates[code];
     const inverse = 1 / rate;
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -215,13 +215,13 @@ function renderRatesTable() {
 function formatAmount(n) {
   if (isNaN(n)) return '';
   if (Math.abs(n) >= 1000) return n.toFixed(2);
-  if (Math.abs(n) >= 1)    return n.toFixed(4);
+  if (Math.abs(n) >= 1) return n.toFixed(4);
   return n.toFixed(6);
 }
 
 function formatRate(n) {
-  if (Math.abs(n) >= 100)  return n.toFixed(2);
-  if (Math.abs(n) >= 1)    return n.toFixed(4);
+  if (Math.abs(n) >= 100) return n.toFixed(2);
+  if (Math.abs(n) >= 1) return n.toFixed(4);
   return n.toFixed(6);
 }
 
@@ -237,7 +237,7 @@ function updateUpdatedLabel() {
 // ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', loadRates);
 
-window.loadRates        = loadRates;
-window.convertFrom      = convertFrom;
-window.convertTo        = convertTo;
-window.swapCurrencies   = swapCurrencies;
+window.loadRates = loadRates;
+window.convertFrom = convertFrom;
+window.convertTo = convertTo;
+window.swapCurrencies = swapCurrencies;
