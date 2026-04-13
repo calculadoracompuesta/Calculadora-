@@ -5,6 +5,7 @@ const TRANSLATIONS = {
   es: {
     'page.title':       'Calculadora de Interés Compuesto Gratuita | Simula tu Inversión',
     'nav.logo':         'Calculadora Financiera',
+    'nav.menu':         'Herramientas',
     'nav.calc':         'Calculadora',
     'nav.indices':      'Índices mundiales',
     'header.label':     'Herramienta financiera gratuita',
@@ -233,6 +234,7 @@ const TRANSLATIONS = {
     'curr.cny': '🇨🇳 China',
     'page.title':       'Free Compound Interest Calculator | Investment Simulator',
     'nav.logo':         'Financial Calculator',
+    'nav.menu':         'Tools',
     'nav.calc':         'Calculator',
     'nav.indices':      'World Indices',
     'header.label':     'Free financial tool',
