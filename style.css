@@ -1158,3 +1158,263 @@ footer {
    opacity: 1;
    transform: translateY(0);
 }
+
+/* ══════════════════════════════════════════
+   MOBILE — Optimización completa ≤ 600px
+══════════════════════════════════════════ */
+@media (max-width: 600px) {
+
+   /* --- Cuerpo --- */
+   body {
+      padding-bottom: 48px;
+   }
+
+   /* --- Nav --- */
+   .nav-inner {
+      padding: 0 14px;
+      height: 48px;
+   }
+
+   .nav-logo {
+      font-size: 0.75rem;
+      letter-spacing: 0;
+      max-width: 140px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .nav-links {
+      gap: 4px;
+   }
+
+   /* Ocultar texto «Herramientas», mostrar solo icono en móvil */
+   .nav-dropdown-btn span[data-i18n] {
+      display: none;
+   }
+
+   .nav-dropdown-btn {
+      padding: 6px 10px;
+      min-width: 36px;
+      min-height: 36px;
+      justify-content: center;
+   }
+
+   /* Dropdown ocupa ancho pantalla en móvil */
+   .nav-dropdown-menu {
+      right: -14px;
+      min-width: 180px;
+   }
+
+   /* Touch target mínimo 44px */
+   .nav-btn {
+      min-width: 36px;
+      min-height: 36px;
+      padding: 6px 8px;
+   }
+
+   /* --- Header --- */
+   header {
+      padding: 36px 16px 28px;
+   }
+
+   header h1 {
+      font-size: 1.45rem;
+   }
+
+   header p {
+      font-size: 0.86rem;
+      margin-bottom: 24px;
+   }
+
+   .header-stats {
+      max-width: 100%;
+      flex-direction: column;
+   }
+
+   .stat-divider {
+      width: 100%;
+      height: 1px;
+   }
+
+   .stat {
+      padding: 10px 14px;
+   }
+
+   /* --- Layout --- */
+   .container {
+      padding: 20px 14px 0;
+   }
+
+   /* --- Cards --- */
+   .card {
+      padding: 20px 16px;
+   }
+
+   /* --- Labels e inputs --- */
+   label {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+   }
+
+   .val-wrap {
+      align-self: flex-end;
+      padding: 8px 12px;
+   }
+
+   .num-input {
+      width: 80px;
+      font-size: 1rem;
+   }
+
+   /* Thumb más grande en touch */
+   input[type=range]::-webkit-slider-thumb {
+      width: 20px;
+      height: 20px;
+   }
+
+   input[type=range]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+   }
+
+   /* Select altura touch-friendly */
+   select {
+      padding: 11px 12px;
+      font-size: 0.9rem;
+   }
+
+   /* --- Resultados --- */
+   .results-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+   }
+
+   .result-box {
+      padding: 12px 10px;
+   }
+
+   .result-box .value {
+      font-size: 1rem;
+   }
+
+   .result-box .label {
+      font-size: 0.6rem;
+   }
+
+   /* --- Gráfico --- */
+   .chart-wrapper {
+      height: 200px;
+   }
+
+   /* --- Botones compartir --- */
+   .share-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+   }
+
+   .share-btn {
+      justify-content: center;
+      padding: 11px 14px;
+      font-size: 0.76rem;
+      min-height: 44px;
+   }
+
+   /* --- Tabla: scroll horizontal con hint --- */
+   .table-wrap {
+      position: relative;
+   }
+
+   /* Celdas más compactas en móvil */
+   th, td {
+      padding: 8px 8px;
+      font-size: 0.76rem;
+      white-space: nowrap;
+   }
+
+   thead th {
+      font-size: 0.6rem;
+      padding: 0 8px 8px;
+   }
+
+   /* --- Contenido educativo --- */
+   .content-section {
+      margin-top: 28px;
+   }
+
+   .content-h2 {
+      font-size: 0.95rem;
+   }
+
+   .example-box {
+      padding: 16px;
+   }
+
+   /* --- FAQ --- */
+   .faq-item {
+      padding: 16px 14px;
+   }
+
+   .faq-q {
+      font-size: 0.86rem;
+   }
+
+   .faq-a {
+      font-size: 0.82rem;
+   }
+
+   /* --- Accordion --- */
+   .accordion-btn {
+      padding: 14px 16px;
+      font-size: 0.84rem;
+      min-height: 44px;
+   }
+
+   /* --- Footer --- */
+   footer {
+      margin-top: 40px;
+      padding: 16px 16px;
+   }
+
+   .footer-links {
+      flex-direction: column;
+      gap: 6px;
+      text-align: center;
+   }
+
+   .footer-links span {
+      display: none; /* ocultar separador · */
+   }
+
+   /* --- Índices: filtros en wrap --- */
+   .index-filters {
+      gap: 5px;
+   }
+
+   .filter-btn {
+      padding: 5px 10px;
+      font-size: 0.72rem;
+   }
+
+   .index-year-selector {
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+   }
+}
+
+/* Breakpoint intermedio tablet pequeña */
+@media (max-width: 420px) {
+   header h1 {
+      font-size: 1.25rem;
+   }
+
+   .results-grid {
+      grid-template-columns: 1fr;
+   }
+
+   .result-box .value {
+      font-size: 1.1rem;
+   }
+}
