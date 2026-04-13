@@ -45,9 +45,42 @@
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" data-i18n="nav.logo">Calculadora Financiera</a>
       <div class="nav-links">
-        <a href="index.html"    class="nav-link" data-i18n="nav.calc">Calculadora</a>
-        <a href="indices.html"  class="nav-link" data-i18n="nav.indices">Índices mundiales</a>
-        <a href="conversor.html" class="nav-link active" data-i18n="nav.conversor">Conversor divisas</a>
+        <!-- DROPDOWN DE PÁGINAS -->
+        <div class="nav-dropdown">
+          <button
+            class="nav-dropdown-btn"
+            id="nav-menu-btn"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+            onclick="toggleNavMenu()"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+            <span data-i18n="nav.menu">Herramientas</span>
+            <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" id="nav-menu" role="menu">
+            <a href="index.html" role="menuitem">
+              <svg class="menu-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span data-i18n="nav.calc">Calculadora</span>
+            </a>
+            <a href="indices.html" role="menuitem">
+              <svg class="menu-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <span data-i18n="nav.indices">Índices mundiales</span>
+            </a>
+            <a href="conversor.html" class="active" role="menuitem">
+              <svg class="menu-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+              <span data-i18n="nav.conversor">Conversor divisas</span>
+            </a>
+          </div>
+        </div>
+
         <div class="nav-divider"></div>
         <button class="nav-btn lang-btn" id="lang-toggle" onclick="toggleLang()" title="Switch language">EN</button>
         <button class="nav-btn theme-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
@@ -146,7 +179,6 @@
     </div>
 
     <!-- SECCIÓN EDUCATIVA -->
-    <!-- SECCIÓN EDUCATIVA -->
   <section class="content-section" style="margin-top:24px;">
   <h2 class="content-h2" data-i18n="conv.edu.h2">¿Cómo funcionan los tipos de cambio?</h2>
   <div class="content-grid">
@@ -186,6 +218,22 @@
   <script src="conversor.js"></script>
   <script src="cookies.js"></script>
   <script src="i18n.js"></script>
+  <script>
+    function toggleNavMenu() {
+      const btn = document.getElementById('nav-menu-btn');
+      const menu = document.getElementById('nav-menu');
+      const isOpen = menu.classList.contains('open');
+      menu.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    }
+    document.addEventListener('click', function(e) {
+      const dropdown = document.querySelector('.nav-dropdown');
+      if (dropdown && !dropdown.contains(e.target)) {
+        document.getElementById('nav-menu').classList.remove('open');
+        document.getElementById('nav-menu-btn').setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
 
 </body>
 </html>
